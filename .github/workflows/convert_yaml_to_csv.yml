@@ -48,3 +48,8 @@ jobs:
           git tag -a v${{ github.run_number }} -m "Tagging build ${{ github.run_number }}"
           git push origin v${{ github.run_number }} --follow-tags
 
+      - name: Upload CSV file as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: data-csv-${{ github.run_number }}
+          path: path/to/your/csv/data.csv
