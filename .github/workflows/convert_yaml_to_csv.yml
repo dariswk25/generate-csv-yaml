@@ -40,7 +40,7 @@ jobs:
 
       - name: Create Git tag
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GB_TOKEN }}
         run: |
           git config --local user.email "dariswk25@gmail.com"
           git config --local user.name "daris"
