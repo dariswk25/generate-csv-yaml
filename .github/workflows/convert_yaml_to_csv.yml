@@ -1,4 +1,4 @@
-name: Convert YAML to CSV and Tag
+name: Convert YAML to CSV
 
 on:
   push:
@@ -26,9 +26,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install pyyaml pandas
 
-      - name: List files for debugging
-        run: ls -R
-
       - name: Convert YAML to CSV
         run: python scripts/convert_yaml_to_csv.py
 
@@ -37,20 +34,3 @@ jobs:
         with:
           name: converted-csv
           path: data.csv
-
-      - name: Create GitHub Tag
-        id: create_tag
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const tagName = `csv-generated-${new Date().toISOString().split('T')[0]}`;
-            const { data: ref } = await github.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: `refs/tags/${tagName}`,
-              sha: context.sha,
-            });
-            core.setOutput('tag_name', tagName);
-      
-      - name: Output Tag Name
-        run: echo "Created tag: ${{ steps.create_tag.outputs.tag_name }}"
