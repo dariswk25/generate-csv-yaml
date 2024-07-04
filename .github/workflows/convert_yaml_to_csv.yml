@@ -46,3 +46,4 @@ jobs:
           git config --local user.name "daris"
           git tag -a v${{ github.run_number }} -m "Tagging build ${{ github.run_number }}"
           git push origin v${{ github.run_number }} --follow-tags
+
